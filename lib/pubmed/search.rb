@@ -9,7 +9,7 @@ module Pubmed
 
   private
 
-    def build_search_uri(terms, offset, limit, options)
+    def self.build_search_uri(terms, offset, limit, options)
       term = terms.is_a?(Array) ? terms.join('+AND+') : terms
 
       uri = URI.parse(ESEARCH_URI)
@@ -28,7 +28,7 @@ module Pubmed
       uri
     end
 
-    def parse_search_response(xml)
+    def self.parse_search_response(xml)
       count = xml.xpath('.//Count').text.to_i
       pubmed_ids = xml.xpath('.//Id').map { |id_element| id_element.text }
     end
