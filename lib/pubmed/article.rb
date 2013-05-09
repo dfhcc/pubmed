@@ -5,10 +5,6 @@ module Pubmed
       get_fetch_results(args.flatten)
     end
 
-    def self.search(*args)
-
-    end
-
     def initialize(element)
       @element = element
     end

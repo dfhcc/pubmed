@@ -1,7 +1,7 @@
 module Pubmed
   class Query
 
-    def get_results(uri)
+    def self.get_response(uri)
       result = Net::HTTP.get_response(uri)
       return Nokogiri::XML(result.body)
     end
