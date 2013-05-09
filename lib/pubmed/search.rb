@@ -31,6 +31,7 @@ module Pubmed
     def self.parse_search_response(xml)
       count = xml.xpath('.//Count').text.to_i
       pubmed_ids = xml.xpath('.//Id').map { |id_element| id_element.text }
+      return SearchResult.new(count, pubmed_ids)
     end
 
   end
