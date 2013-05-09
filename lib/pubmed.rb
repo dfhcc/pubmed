@@ -14,4 +14,6 @@ module Pubmed
   BASE_URI = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/'
   ESEARCH_URI = BASE_URI + 'esearch.fcgi'
   EFETCH_URI  = BASE_URI + 'efetch.fcgi'
+
+  SearchResult = Struct.new(:count, :pubmed_ids)
 end

@@ -3,45 +3,58 @@ module Pubmed
 
     def initialize(scope)
       @scope = scope
+      @terms = []
+      @params = {
+        :db     => 'pubmed'
+      }
+    end
+
+    # the full query url with params
+    def uri
+      
     end
 
     # run the query and return the results?
     def execute
-      # Run the query
+      # build the query string
+      # run the query
+      # return the results
     end
 
-    # args
-    # can be an Array or Hash
-    # when Array it is a list of terms
-    # when Hash it is {
-    #                   :terms => ['id1',...,'idn'], 
-    #                   :dates => { :datetype => 'pdate|mdate|edate', 
-    #                               :mindate => 'YYYY/MM/DD|YYYY/MM|YYYY', 
-    #                               :maxdate => 'YYYY/MM/DD|YYYY/MM|YYYY' }
-    #                 }
-    def where(args)
-      # TODO
+    # a term or array of terms
+    def where(terms)
+      @terms += (terms.is_a?(Array) ?  terms : [terms])
+      @terms.uniq!
+      self
+    end
+
+    # a hash of date options
+    def dates(opts)
+      if opts.is_a?(Hash)
+        opts = { :datetype => 'pdate' }.merge(opts)
+        @params.merge!(opts) 
+      end
       self
     end
 
     # the offset into the collection
     # Pubmed param: retstart
     def offset(val)
-      # TODO
+      @params[:retstart] = val
       self
     end
 
     # the number of records to return
     # Pubmed param: retmax
     def limit(val)
-      # TODO
+      @params[:retmax] = val
       self
     end
 
     # sets the return type to 'count' instead of 'uilist'
     # so this just returns the count in the xml returned from Pubmed
     def count
-      # TODO
+      @params[:rettype] = 'count'
       self
     end
 

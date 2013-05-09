@@ -1,8 +1,12 @@
 module Pubmed
   class Article
 
-    def self.find(*args)
+    def self.fetch(*args)
       
+    end
+
+    def self.search(*args)
+
     end
 
     def initialize(element)
