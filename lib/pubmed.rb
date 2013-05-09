@@ -5,10 +5,12 @@ require 'net/http'
 require 'date'
 
 require 'pubmed/version'
-require 'pubmed/article_query'
 require 'pubmed/article'
 require 'pubmed/journal'
 require 'pubmed/author'
+require 'pubmed/query'
+require 'pubmed/search'
+require 'pubmed/fetch'
 
 module Pubmed
   BASE_URI = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/'
