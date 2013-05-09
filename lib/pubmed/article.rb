@@ -1,6 +1,10 @@
 module Pubmed
   class Article
 
+    def self.find(*args)
+      
+    end
+
     def initialize(element)
       @element = element
     end
