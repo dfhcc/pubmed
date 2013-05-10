@@ -19,4 +19,17 @@ module Pubmed
   EFETCH_URI  = BASE_URI + 'efetch.fcgi'
 
   SearchResult = Struct.new(:count, :pubmed_ids)
+
+  def self.search(terms, offset=0, limit=20, options={})
+    ESearch.search(terms, offset, limit, options)
+  end
+
+  def self.fetch(ids, options={})
+    EFetch.fetch(ids, options)
+  end
+
+  def self.search_and_fetch(terms, offset=0, limit=20, search_options={}, fetch_options={})
+    search_result = search(terms, offset, limit, search_options)
+    fetch(search_result.pubmed_ids, fetch_options)
+  end
 end
