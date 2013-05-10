@@ -23,7 +23,11 @@ module Pubmed
 
     # a term or array of terms
     def where(terms)
-      @terms += (terms.is_a?(Array) ?  terms : [terms])
+      if terms.is_a?(Array)
+        @terms += terms
+      else
+        @terms << terms
+      end
       @terms.uniq!
       self
     end
