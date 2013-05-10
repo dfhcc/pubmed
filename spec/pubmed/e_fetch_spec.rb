@@ -7,6 +7,22 @@ describe Pubmed::EFetch do
     Pubmed::EFetch.stub(:get_response).and_return(@response_xml)
   end
 
+  describe '.build_id_param' do
+    context 'given a single id' do
+      it 'should return the id' do
+        id = '123456789'
+        Pubmed::EFetch.build_id_param(id).should == id
+      end
+    end
+
+    context 'given an array of ids' do
+      it 'should return a comma separated string of the ids' do
+        ids = ['123456789', '987654321']
+        Pubmed::EFetch.build_id_param(ids).should == ids.join(',')
+      end
+    end
+  end
+
   describe '.build_fetch_uri' do
     it 'should build the fetch uri for the paramters' do
       ids = ['23650637', '23645694']

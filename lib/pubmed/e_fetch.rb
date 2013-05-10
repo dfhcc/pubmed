@@ -9,15 +9,17 @@ module Pubmed
 
   private
 
-    def self.build_fetch_uri(ids, options)
-      ids = ids.join(',') if ids.is_a?(Array)
+    def self.build_id_param(ids)
+      ids.is_a?(Array) ? ids.join(',') : ids
+    end
 
+    def self.build_fetch_uri(ids, options)
       uri = URI.parse(EFETCH_URI)
 
       params = {
         :db => 'pubmed',
         :retmode => 'xml',
-        :id => ids
+        :id => build_id_param(ids)
       }
 
       uri.query = encode_params(params, options)
