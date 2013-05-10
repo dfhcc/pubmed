@@ -33,6 +33,15 @@ module Pubmed
       @author_names ||= build_author_names
     end
 
+    def ==(other)
+      self.pubmed_id == other.pubmed_id &&
+      self.publication_date == other.publication_date &&
+      self.title == other.title &&
+      self.abstract == other.abstract &&
+      self.journal == other.journal &&
+      self.authors == other.authors
+    end
+
   private
 
     def build_publication_date
