@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Pubmed::Fetch do
+describe Pubmed::EFetch do
   
 end

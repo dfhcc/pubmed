@@ -1,10 +1,10 @@
 module Pubmed
-  class Search < Query
+  class ESearch < Query
 
     def self.search(terms, offset=0, limit=20, options={})
       return SearchResult.new(0, []) if terms.blank?
-      response = get_response(build_search_uri(terms, offset, limit, options))
-      return parse_search_response(response)
+      response_xml = get_response(build_search_uri(terms, offset, limit, options))
+      return parse_search_response(response_xml)
     end
 
   private
@@ -28,9 +28,9 @@ module Pubmed
       uri
     end
 
-    def self.parse_search_response(xml)
-      count = xml.xpath('.//Count').text.to_i
-      pubmed_ids = xml.xpath('.//Id').map { |id_element| id_element.text }
+    def self.parse_search_response(response_xml)
+      count = response_xml.xpath('.//Count').text.to_i
+      pubmed_ids = response_xml.xpath('.//Id').map { |id_element| id_element.text }
       return SearchResult.new(count, pubmed_ids)
     end
 

@@ -1,10 +1,6 @@
 module Pubmed
   class Article
 
-    def self.fetch(*args)
-      get_fetch_results(args.flatten)
-    end
-
     def initialize(element)
       @element = element
     end
@@ -38,51 +34,6 @@ module Pubmed
     end
 
   private
-
-    def self.get_results(uri)
-      result = Net::HTTP.get_response(uri)
-      return Nokogiri::XML(result.body)
-    end
-
-    def self.get_fetch_results(pubmed_ids)
-      results = get_results(build_fetch_uri(pubmed_ids))
-      return results.xpath('.//PubmedArticle').map { |element| Article.new(element) }
-    end
-
-    def self.build_fetch_uri(pubmed_ids)
-      uri = URI.parse(EFETCH_URI)
-
-      params = {
-        :db => 'pubmed',
-        :retmode => 'xml',
-        :id => pubmed_ids.join(',')
-      }
-
-      uri.query = URI.encode_www_form(params)
-      uri
-    end
-
-    def self.get_search_results(terms, options={})
-      results = get_results(build_search_uri(terms))
-      if results.xpath('.//Id').any?
-        pubmed_ids = results.xpath('.//Id').map { |id_element| id_element.text }
-        get_fetch_results(pubmed_ids)
-      else
-        results.xpath('.//Count').text
-      end
-    end
-
-    def self.build_search_uri(terms, options={})
-      uri = URI.parse(ESEARCH_URI)
-
-      params = {
-        :db => 'pubmed',
-        :term => ''
-      }
-
-      uri.query = URI.encode_www_form(params)
-      uri
-    end
 
     def build_publication_date
       year = @element.xpath('.//DateCreated/Year').text

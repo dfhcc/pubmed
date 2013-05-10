@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Pubmed::Search do
+describe Pubmed::ESearch do
   
 end
