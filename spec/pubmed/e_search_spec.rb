@@ -22,25 +22,17 @@ describe Pubmed::ESearch do
     end
   end
 
-  context 'given an empty search term' do
-    before(:each) { @result = Pubmed::ESearch.search('') }
-
-    describe 'returned SearchResult object' do
-      it 'should have a count of 0' do
-        @result.count.should be_zero
-      end
-
-      it 'should have an empty pubmed_ids array' do
-        @result.pubmed_ids.should be_empty
+  describe '.search' do
+    context 'given an empty search term' do
+      it 'should return a SearchResult object with a count of zero and an empty pubmed_ids array' do
+        Pubmed::ESearch.search('').should == Pubmed::SearchResult.new(0, [])
       end
     end
-  end
 
-  context 'given a search term' do
-    before(:each) { @result = Pubmed::ESearch.search('some term') }
-
-    it 'should return a SearchResult' do
-      @result.should == @expected_result
+    context 'given a search term' do
+      it 'should return a SearchResult' do
+        Pubmed::ESearch.search('some term').should == @expected_result
+      end
     end
   end
 end
