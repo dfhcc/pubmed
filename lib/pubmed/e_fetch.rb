@@ -10,7 +10,7 @@ module Pubmed
   private
 
     def self.build_fetch_uri(ids, options)
-      ids = ids.join(',') if pubmed_ids.is_a?(Array)
+      ids = ids.join(',') if ids.is_a?(Array)
 
       uri = URI.parse(EFETCH_URI)
 
