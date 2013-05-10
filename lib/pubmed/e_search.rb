@@ -9,14 +9,16 @@ module Pubmed
 
   private
 
-    def self.build_search_uri(terms, offset, limit, options)
-      term = terms.is_a?(Array) ? terms.join('+AND+') : terms
+    def self.build_term_param(terms)
+      terms.is_a?(Array) ? terms.join('+AND+') : terms
+    end
 
+    def self.build_search_uri(terms, offset, limit, options)
       uri = URI.parse(ESEARCH_URI)
 
       params = {
         :db => 'pubmed',
-        :term => term,
+        :term => build_term_param(terms),
         :retstart => offset,
         :retmax => limit
       }
@@ -27,12 +29,11 @@ module Pubmed
 
       uri
     end
-
+    
     def self.parse_search_response(response_xml)
       count = response_xml.xpath('.//Count').first.text.to_i
       pubmed_ids = response_xml.xpath('.//Id').map(&:text)
       return SearchResult.new(count, pubmed_ids)
     end
-
   end
 end

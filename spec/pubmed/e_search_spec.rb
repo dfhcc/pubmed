@@ -7,6 +7,20 @@ describe Pubmed::ESearch do
     Pubmed::ESearch.stub(:get_response).and_return(@response_xml)
   end
 
+  describe '.build_term_param' do
+    context 'given a single term' do
+      it 'should return the term' do
+        Pubmed::ESearch.build_term_param('test_term').should == 'test_term'
+      end
+    end
+
+    context 'given an array of terms' do
+      it 'should return a string where each term is joined by "+AND+"' do
+        Pubmed::ESearch.build_term_param(['test_term1', 'test_term2']).should == 'test_term1+AND+test_term2'
+      end
+    end
+  end
+
   describe '.build_search_uri' do
     it 'should build the search uri for the paramters' do
       term = 'test_term'
