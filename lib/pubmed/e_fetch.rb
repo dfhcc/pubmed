@@ -20,9 +20,7 @@ module Pubmed
         :id => ids
       }
 
-      params.merge!(options)
-
-      uri.query = URI.encode_www_form(params)
+      uri.query = encode_params(params, options)
 
       uri
     end
