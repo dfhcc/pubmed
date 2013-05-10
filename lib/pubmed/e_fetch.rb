@@ -28,7 +28,7 @@ module Pubmed
     end
 
     def self.parse_fetch_response(response_xml)
-      response_xml.xpath('./PubmedArticleSet/PubmedArticle')
+      response_xml.xpath('./PubmedArticleSet/PubmedArticle').map { |element| Article.new(element) }
     end
 
   end

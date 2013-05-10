@@ -15,4 +15,30 @@ describe Pubmed::EFetch do
       Pubmed::EFetch.build_fetch_uri(ids, {}).should == expected
     end
   end
+
+  describe '.parse_fetch_response' do
+    it 'should parse the returned results into a collection of Articles' do
+      Pubmed::EFetch.parse_fetch_response(@response_xml).should == @expected_result
+    end
+  end
+
+  describe '.fetch' do
+    context 'given a blank id' do 
+      it 'should return an empty array' do
+        Pubmed::EFetch.fetch('').should == []
+      end
+    end
+
+    context 'given an empty array of ids' do
+      it 'should return an empty array' do
+        Pubmed::EFetch.fetch([]).should == []
+      end
+    end
+
+    context 'given an id' do
+      it 'should return an array of Articles' do
+        Pubmed::EFetch.fetch('123456789').should == @expected_result
+      end
+    end
+  end
 end
