@@ -6,7 +6,7 @@ module Pubmed
     end
 
     def pubmed_id
-      @pubmed_id ||= @element.xpath('.//PMID').text
+      @pubmed_id ||= @element.xpath('.//PMID').first.text
     end
 
     def publication_date

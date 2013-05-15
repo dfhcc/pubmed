@@ -23,7 +23,6 @@ describe Pubmed::ESearch do
 
   describe '.build_search_uri' do
     it 'should build the search uri for the paramters' do
-      debugger
       term = 'test_term'
       expected = URI.parse(Pubmed::ESEARCH_URI)
       expected.query = URI.encode_www_form({:db => 'pubmed', :term => term, :retstart => 0, :retmax => 20})
