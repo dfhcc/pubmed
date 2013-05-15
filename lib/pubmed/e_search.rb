@@ -13,9 +13,14 @@ module Pubmed
       terms.is_a?(Array) ? terms.join('+AND+') : terms
     end
 
-    def self.build_search_uri(terms, offset, limit, options)
-      uri = URI.parse(ESEARCH_URI)
+    def self.querystringify(hash)
+      hash.map do |opt, val|
+        val = val.tr(' ', '+') if val.is_a?(String)
+        URI.escape("#{opt}=#{val}")
+      end.join('&')
+    end
 
+    def self.build_search_uri(terms, offset, limit, options)
       params = {
         :db => 'pubmed',
         :term => build_term_param(terms),
@@ -23,7 +28,9 @@ module Pubmed
         :retmax => limit
       }
 
-      uri.query = encode_params(params, options)
+      query = querystringify(params)
+
+      uri = URI.parse(ESEARCH_URI + '?' + query)
 
       uri
     end
