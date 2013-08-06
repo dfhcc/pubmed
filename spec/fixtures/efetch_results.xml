@@ -99,6 +99,7 @@
             <ArticleId IdType="pii">haematol.2013.086207</ArticleId>
             <ArticleId IdType="doi">10.3324/haematol.2013.086207</ArticleId>
             <ArticleId IdType="pubmed">23645694</ArticleId>
+            <ArticleId IdType="pmc">PMC98123418</ArticleId>
         </ArticleIdList>
     </PubmedData>
 </PubmedArticle>
@@ -208,6 +209,7 @@
             <ArticleId IdType="pii">S0021-9150(13)00248-7</ArticleId>
             <ArticleId IdType="doi">10.1016/j.atherosclerosis.2013.04.008</ArticleId>
             <ArticleId IdType="pubmed">23642732</ArticleId>
+            <ArticleId IdType="pmc">PMC76719281</ArticleId>
         </ArticleIdList>
     </PubmedData>
 </PubmedArticle>

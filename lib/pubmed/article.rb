@@ -9,6 +9,10 @@ module Pubmed
       @pubmed_id ||= @element.xpath('.//PMID').first.text
     end
 
+    def pubmed_central_id
+      @pubmed_central_id ||= @element.xpath('.//PubmedData/ArticleIdList/ArticleId[@IdType=pmc]').text
+    end
+
     def publication_date
       @publication_date ||= build_publication_date
     end

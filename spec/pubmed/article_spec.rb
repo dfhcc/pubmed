@@ -13,6 +13,12 @@ describe Pubmed::Article do
     end
   end
 
+  describe '#pubmed_central_id' do
+    it 'should be set to the value in the retrieved xml' do
+      @article.pubmed_central_id.should == @article_element.xpath('.//PubmedData/ArticleIdList/ArticleId[@IdType=pmc]').text
+    end
+  end
+
   describe '#publication_date' do
     it 'should be set to the value in the retrieved xml' do
       year = @article_element.xpath('.//DateCreated/Year').text
