@@ -1,9 +1,10 @@
 module Pubmed
   module TestHelpers
 
-    def mock_article(pubmed_id, title, abstract, publication_date, journal=nil, authors=[])
+    def mock_article(pubmed_id, pubmed_central_id, title, abstract, publication_date, journal=nil, authors=[])
       article = Article.new(nil)
       article.stub(:pubmed_id).and_return(pubmed_id)
+      article.stub(:pubmed_central_id).and_return(pubmed_central_id)
       article.stub(:title).and_return(title)
       article.stub(:abstract).and_return(abstract)
       article.stub(:publication_date).and_return(publication_date)
