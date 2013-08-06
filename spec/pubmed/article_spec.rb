@@ -15,7 +15,7 @@ describe Pubmed::Article do
 
   describe '#pubmed_central_id' do
     it 'should be set to the value in the retrieved xml' do
-      @article.pubmed_central_id.should == @article_element.xpath('.//PubmedData/ArticleIdList/ArticleId[@IdType=pmc]').text
+      @article.pubmed_central_id.should == @article_element.xpath('.//PubmedData/ArticleIdList/ArticleId[@IdType="pmc"]').text
     end
   end
 

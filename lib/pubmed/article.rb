@@ -10,7 +10,7 @@ module Pubmed
     end
 
     def pubmed_central_id
-      @pubmed_central_id ||= @element.xpath('.//PubmedData/ArticleIdList/ArticleId[@IdType=pmc]').text
+      @pubmed_central_id ||= @element.xpath('.//PubmedData/ArticleIdList/ArticleId[@IdType="pmc"]').text
     end
 
     def publication_date
